@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>العروض - Salamia Deliveo</title>
+  <!-- خطوط Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome للأيقونات -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* أساسيات الصفحة - نظام ألوان متكامل (مطابق للصفحة الرئيسية) */
+    :root {
+      --primary-orange: #FF6B35;
+      --secondary-yellow: #FFC857;
+      --accent-red: #E83F3F;
+      --dark-blue: #2C3E50;
+      --light-gray: #ECF0F1;
+      --medium-gray: #BDC3C7;
+      --white: #FFFFFF;
+      --black: #2D3436;
+      --success: #27AE60;
+      --warning: #F39C12;
+      
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+      
+      --border-radius: 16px;
+      --border-radius-lg: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+      padding-bottom: 70px;
+    }
+
+    /* الخلفية المائية */
+    .watermark-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://i.postimg.cc/SKYvRztj/Logo.png");
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      opacity: 0.02;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* الهيدر الثابت */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, var(--primary-orange), var(--secondary-yellow));
+      padding: 40px 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .logo-container {
+      text-align: center;
+    }
+
+    .logo-container img {
+      height: 100px;
+      width: auto;
+      transition: all 0.3s ease;
+    }
+
+    .contact-link {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      color: var(--white);
+      padding: 10px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* عنوان الصفحة */
+    .page-header {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(255,200,87,0.1));
+    }
+
+    .page-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--primary-orange);
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--primary-orange), var(--accent-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-subtitle {
+      font-size: 1.2rem;
+      color: var(--dark-blue);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* قسم العروض */
+    .offers-section {
+      padding: 40px 20px;
+    }
+
+    .offers-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .offer-card {
+      background: var(--white);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .offer-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: var(--accent-red);
+      color: var(--white);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      z-index: 2;
+    }
+
+    .offer-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .offer-content {
+      padding: 20px;
+    }
+
+    .offer-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 10px;
+    }
+
+    .offer-description {
+      color: var(--medium-gray);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .offer-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .offer-price {
+      font-weight: 700;
+      color: var(--accent-red);
+      font-size: 1.1rem;
+    }
+
+    .offer-expiry {
+      font-size: 0.9rem;
+      color: var(--medium-gray);
+    }
+
+    .offer-cta {
+      display: block;
+      background: linear-gradient(135deg, var(--primary-orange), var(--accent-red));
+      color: var(--white);
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .offer-cta:hover {
+      transform: scale(1.03);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* قسم العروض الحصرية */
+    .exclusive-offers {
+      padding: 60px 20px;
+      background: linear-gradient(135deg, var(--accent-red), var(--primary-orange));
+      color: var(--white);
+      margin: 40px 0;
+    }
+
+    .exclusive-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .exclusive-title {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .exclusive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .exclusive-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 25px;
+      border-radius: var(--border-radius);
+      text-align: center;
+    }
+
+    .exclusive-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .exclusive-heading {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .exclusive-desc {
+      opacity: 0.9;
+      margin-bottom: 15px;
+    }
+
+    .exclusive-code {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 700;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    /* التذييل */
+    .main-footer {
+      background: var(--dark-blue);
+      color: var(--white);
+      padding: 60px 20px 30px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--primary-orange), var(--secondary-yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-description {
+      opacity: 0.8;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: var(--primary-orange);
+      transform: translateY(-3px);
+    }
+
+    /* Bottom Navigation - Mobile - تم التعديل */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 12px 0 8px;
+    }
+
+    .nav-items {
+      display: flex;
+      justify-content: space-around;
+      padding: 0 5px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: var(--medium-gray);
+      font-size: 0.75rem;
+      flex: 1;
+      min-width: 0;
+      padding: 5px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item.active {
+      color: var(--primary-orange);
+    }
+
+    .nav-icon {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item.active .nav-icon {
+      transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .sticky-header {
+        padding: 30px 0;
+      }
+      
+      .logo-container img {
+        height: 80px;
+      }
+      
+      .contact-link {
+        font-size: 12px;
+        padding: 8px 14px;
+        left: 15px;
+      }
+      
+      .page-title {
+        font-size: 2.2rem;
+      }
+      
+      .page-subtitle {
+        font-size: 1rem;
+      }
+      
+      .offers-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      
+      .offer-image {
+        height: 180px;
+      }
+      
+      .exclusive-title {
+        font-size: 1.8rem;
+      }
+      
+      .nav-icon {
+        font-size: 1.3rem;
+      }
+      
+      .nav-item {
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .sticky-header {
+        padding: 25px 0;
+      }
+      
+      .logo-container img {
+        height: 70px;
+      }
+      
+      .contact-link {
+        padding: 6px 12px;
+        font-size: 11px;
+      }
+      
+      .page-title {
+        font-size: 1.8rem;
+      }
+      
+      .offers-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .exclusive-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-icon {
+        font-size: 1.2rem;
+      }
+      
+      .nav-item {
+        font-size: 0.85rem;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الخلفية المائية -->
+  <div class="watermark-bg"></div>
+
+  <!-- الهيدر الثابت -->
+  <header class="sticky-header">
+    <div class="header-content">
+      <a href="https://wa.me/963XXXXXXXXX" class="contact-link" target="_blank">
+        <i class="fas fa-phone"></i> تواصل معنا
+      </a>
+      <div class="logo-container">
+        <img src="https://i.postimg.cc/SKYvRztj/Logo.png" alt="Salamia Deliveo">
+      </div>
+    </div>
+  </header>
+
+  <!-- عنوان الصفحة -->
+  <section class="page-header">
+    <h1 class="page-title">عروضنا الحصرية</h1>
+    <p class="page-subtitle">استفد من أفضل العروض والخصومات الحصرية من مطاعم سلمية المفضلة لديك</p>
+  </section>
+
+  <!-- قسم العروض -->
+  <section class="offers-section">
+    <div class="offers-container">
+      <!-- عرض 1 -->
+      <div class="offer-card">
+        <div class="offer-badge">20% خصم</div>
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+             alt="عرض البيتزا" class="offer-image">
+        <div class="offer-content">
+          <h3 class="offer-title">خصم 20% على جميع أنواع البيتزا</h3>
+          <p class="offer-description">استمتع بأشهى أنواع البيتزا بخصم 20% من مطعم بيتزا سلمية</p>
+          <div class="offer-details">
+            <span class="offer-price">خصم 20%</span>
+            <span class="offer-expiry">صالح حتى: 30/06/2023</span>
+          </div>
+          <a href="https://deluxe-genie-d796da.netlify.app/restaurants.html" class="offer-cta">اطلب الآن</a>
+        </div>
+      </div>
+
+      <!-- عرض 2 -->
+      <div class="offer-card">
+        <div class="offer-badge">وجبتين بسعر 1</div>
+        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+             alt="عرض البرغر" class="offer-image">
+        <div class="offer-content">
+          <h3 class="offer-title">احصل على وجبتين برغر بسعر وجبة واحدة</h3>
+          <p class="offer-description">عرض خاص من برغر هاوس - احصل على وجبتين برغر بسعر وجبة واحدة</p>
+          <div class="offer-details">
+            <span class="offer-price">2x1</span>
+            <span class="offer-expiry">صالح حتى: 25/06/2023</span>
+          </div>
+          <a href="https://deluxe-genie-d796da.netlify.app/restaurants.html" class="offer-cta">اطلب الآن</a>
+        </div>
+      </div>
+
+      <!-- عرض 3 -->
+      <div class="offer-card">
+        <div class="offer-badge">توصيل مجاني</div>
+        <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+             alt="توصيل مجاني" class="offer-image">
+        <div class="offer-content">
+          <h3 class="offer-title">توصيل مجاني للطلبات فوق 50,000 ل.س</h3>
+          <p class="offer-description">احصل على توصيل مجاني لجميع مطاعم سلمية للطلبات فوق 50,000 ليرة سورية</p>
+          <div class="offer-details">
+            <span class="offer-price">مجاني</span>
+            <span class="offer-expiry">عرض دائم</span>
+          </div>
+          <a href="https://deluxe-genie-d796da.netlify.app/restaurants.html" class="offer-cta">اطلب الآن</a>
+        </div>
+      </div>
+
+      <!-- عرض 4 -->
+      <div class="offer-card">
+        <div class="offer-badge">هدية مجانية</div>
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+             alt="هدية مجانية" class="offer-image">
+        <div class="offer-content">
+          <h3 class="offer-title">احصل على حلوى مجانية مع كل طلب</h3>
+          <p class="offer-description">مع كل طلب فوق 30,000 ل.س احصل على حلوى مجانية من اختيارك</p>
+          <div class="offer-details">
+            <span class="offer-price">مجانية</span>
+            <span class="offer-expiry">صالح حتى: 15/07/2023</span>
+          </div>
+          <a href="https://deluxe-genie-d796da.netlify.app/restaurants.html" class="offer-cta">اطلب الآن</a>
+        </div>
+      </div>
+
+      <!-- عرض 5 -->
+      <div class="offer-card">
+        <div class="offer-badge">خصم 30%</div>
+        <img src="https://images.unsplash.com/photo-1559715745-e1b33a271c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+             alt="عرض المشاوي" class="offer-image">
+        <div class="offer-content">
+          <h3 class="offer-title">خصم 30% على وجبات المشاوي</h3>
+          <p class="offer-description">استمتع بخصم 30% على جميع وجبات المشاوي من مطعم مشاوي العائلة</p>
+          <div class="offer-details">
+            <span class="offer-price">خصم 30%</span>
+            <span class="offer-expiry">صالح حتى: 10/07/2023</span>
+          </div>
+          <a href="https://deluxe-genie-d796da.netlify.app/restaurants.html" class="offer-cta">اطلب الآن</a>
+        </div>
+      </div>
+
+      <!-- عرض 6 -->
+      <div class="offer-card">
+        <div class="offer-badge">عروض الصيف</div>
+        <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+             alt="عصائر صيفية" class="offer-image">
+        <div class="offer-content">
+          <h3 class="offer-title">خصم 25% على العصائر والمشروبات</h3>
+          <p class="offer-description">عروض الصيف الحصرية - خصم 25% على جميع العصائر والمشروبات الباردة</p>
+          <div class="offer-details">
+            <span class="offer-price">خصم 25%</span>
+            <span class="offer-expiry">صالح حتى: 31/08/2023</span>
+          </div>
+          <a href="https://deluxe-genie-d796da.netlify.app/restaurants.html" class="offer-cta">اطلب الآن</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- قسم العروض الحصرية -->
+  <section class="exclusive-offers">
+    <div class="exclusive-container">
+      <h2 class="exclusive-title">عروض حصرية للمشتركين</h2>
+      <div class="exclusive-grid">
+        <div class="exclusive-card">
+          <div class="exclusive-icon">🎁</div>
+          <h3 class="exclusive-heading">كود الخصم الأول</h3>
+          <p class="exclusive-desc">احصل على خصم 15% على أول طلب لك</p>
+          <div class="exclusive-code">WELCOME15</div>
+        </div>
+        <div class="exclusive-card">
+          <div class="exclusive-icon">👑</div>
+          <h3 class="exclusive-heading">عرض الولاء</h3>
+          <p class="exclusive-desc">خصم 10% على جميع طلباتك القادمة</p>
+          <div class="exclusive-code">LOYAL10</div>
+        </div>
+        <div class="exclusive-card">
+          <div class="exclusive-icon">🎯</div>
+          <h3 class="exclusive-heading">عرض العائلة</h3>
+          <p class="exclusive-desc">خصم 20% على الطلبات فوق 70,000 ل.س</p>
+          <div class="exclusive-code">FAMILY20</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- التذييل -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <div class="footer-logo">Salamia Deliveo</div>
+        <p class="footer-description">
+          الطريقة الأسهل لطلب الطعام من أفضل مطاعم سلمية إلى باب منزلك
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bottom Navigation - Mobile - تم التعديل -->
+  <nav class="bottom-nav">
+    <div class="nav-items">
+      <a href="https://deluxe-genie-d796da.netlify.app/index.html" class="nav-item">
+        <i class="fas fa-home nav-icon"></i>
+        <span>الرئيسية</span>
+      </a>
+      <a href="https://deluxe-genie-d796da.netlify.app/restaurants.html" class="nav-item">
+        <i class="fas fa-utensils nav-icon"></i>
+        <span>المطاعم</span>
+      </a>
+      <a href="#" class="nav-item active">
+        <i class="fas fa-percentage nav-icon"></i>
+        <span>العروض</span>
+      </a>
+    </div>
+  </nav>
+
+  <script>
+    // تفعيل أزرار التنقل في الشريط السفلي
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        if (this.getAttribute('href') === '#') {
+          e.preventDefault();
+        }
+      });
+    });
+
+    // تأثيرات التمرير للبطاقات
+    const offerCards = document.querySelectorAll('.offer-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    offerCards.forEach(card => {
+      card.style.opacity = 0;
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>
