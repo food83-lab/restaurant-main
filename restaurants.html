@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المطاعم - Salamia Deliveo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===== إعدادات عامة ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f8f9fa;
+      color: #2D3436;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* ===== الهيدر العام ===== */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #F15A29, #FFD27F);
+      padding: 15px 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo-container img {
+      height: 50px;
+      width: auto;
+    }
+
+    .back-btn {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ===== شريط البحث ===== */
+    .search-container {
+      background: white;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 20px auto;
+      max-width: 1200px;
+      border-radius: 16px;
+    }
+
+    .search-bar {
+      display: flex;
+      width: 100%;
+      background: #ECF0F1;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 15px 20px;
+      border: none;
+      background: transparent;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+    }
+
+    .search-button {
+      background: #F15A29;
+      color: white;
+      border: none;
+      padding: 0 25px;
+      cursor: pointer;
+    }
+
+    /* ===== صفحة المطاعم - الحل الجديد ===== */
+    .restaurants-section {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #2C3E50;
+      margin-bottom: 5px;
+    }
+
+    .section-subtitle {
+      color: #BDC3C7;
+    }
+
+    /* ⭐⭐⭐ الحل الجديد - Grid System ⭐⭐⭐ */
+    .restaurants-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      width: 100%;
+    }
+
+    .restaurant-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .restaurant-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      position: relative;
+      height: 140px;
+      overflow: hidden;
+    }
+
+    .restaurant-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ⭐⭐⭐ تحسين اللوغو - أكبر وفي المنتصف ⭐⭐⭐ */
+    .logo-background {
+      position: absolute;
+      top: 50%; /* 👈 في المنتصف عمودياً */
+      right: 50%; /* 👈 في المنتصف أفقياً */
+      transform: translate(50%, -50%); /* 👈 توسيط تام */
+      width: 100px; /* 👈 حجم أكبر */
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #F15A29, #FFD27F);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      border: 5px solid white; /* 👈 إطار أبيض لحماية اللوغو */
+      z-index: 2;
+    }
+
+    .restaurant-logo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background-color: white;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .restaurant-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #E83F3F;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      z-index: 3;
+    }
+
+    .card-content {
+      padding: 25px 15px 15px;
+      text-align: center; /* 👈 محاذاة النص في المنتصف */
+    }
+
+    .restaurant-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #2C3E50;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    /* ⭐⭐⭐ إزالة التقييم ومدة التوصيل ⭐⭐⭐ */
+    .restaurant-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      color: #F39C12;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ===== الشريط السفلي ===== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 12px 0 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-items {
+      display: flex;
+      justify-content: space-around;
+      padding: 0 5px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #BDC3C7;
+      font-size: 0.75rem;
+      flex: 1;
+      min-width: 0;
+      padding: 5px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .nav-item.active {
+      color: #F15A29;
+    }
+
+    .nav-item.active::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      width: 6px;
+      height: 6px;
+      background: #F15A29;
+      border-radius: 50%;
+    }
+
+    .nav-icon {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item.active .nav-icon {
+      transform: translateY(-2px);
+    }
+
+    /* ===== التكيف مع الشاشات الصغيرة جداً ===== */
+    @media (max-width: 480px) {
+      .restaurants-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      
+      .card-header {
+        height: 120px;
+      }
+      
+      .logo-background {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .restaurant-logo {
+        width: 70px;
+        height: 70px;
+      }
+      
+      .card-content {
+        padding: 20px 12px 12px;
+      }
+      
+      .restaurant-name {
+        font-size: 1rem;
+      }
+      
+      .search-container {
+        margin: 10px;
+        padding: 15px;
+      }
+      
+      .restaurants-section {
+        padding: 10px;
+      }
+      
+      .nav-icon {
+        font-size: 1.3rem;
+      }
+      
+      .nav-item {
+        font-size: 0.7rem;
+      }
+    }
+
+    /* ===== تحسينات للشاشات الكبيرة ===== */
+    @media (min-width: 769px) {
+      .restaurants-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .card-header {
+        height: 180px;
+      }
+      
+      .logo-background {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .restaurant-logo {
+        width: 110px;
+        height: 110px;
+      }
+      
+      .card-content {
+        padding: 30px 20px 20px;
+      }
+      
+      .restaurant-name {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* ===== تحسينات للشاشات المتوسطة ===== */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .restaurants-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      
+      .card-header {
+        height: 150px;
+      }
+      
+      .logo-background {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .restaurant-logo {
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    /* ===== تحميل ===== */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #BDC3C7;
+    }
+  </style>
+</head>
+<body>
+  <!-- الهيدر الثابت -->
+  <header class="sticky-header">
+    <div class="header-content">
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i> العودة
+      </a>
+      <div class="logo-container">
+        <img src="https://i.postimg.cc/SKYvRztj/Logo.png" alt="Salamia Deliveo">
+      </div>
+      <div class="search-icon-header">
+        <i class="fas fa-search"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- شريط البحث -->
+  <div class="search-container">
+    <div class="search-bar">
+      <input type="text" class="search-input" placeholder="ابحث عن مطعم أو وجبة...">
+      <button class="search-button">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- قسم المطاعم -->
+  <section class="restaurants-section">
+    <div class="section-header">
+      <h2 class="section-title">مطاعم سلمية</h2>
+      <p class="section-subtitle">اطلب من أفضل المطاعم في مدينتك</p>
+    </div>
+
+    <!-- ⭐⭐⭐ الحل الجديد - يتم ملؤه تلقائياً من JSON ⭐⭐⭐ -->
+    <div class="restaurants-grid" id="restaurants-container">
+      <div class="loading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>جاري تحميل المطاعم...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الشريط السفلي -->
+  <nav class="bottom-nav">
+    <div class="nav-items">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home nav-icon"></i>
+        <span>الرئيسية</span>
+      </a>
+      <a href="#" class="nav-item active">
+        <i class="fas fa-utensils nav-icon"></i>
+        <span>المطاعم</span>
+      </a>
+      <a href="offers.html" class="nav-item">
+        <i class="fas fa-percentage nav-icon"></i>
+        <span>العروض</span>
+      </a>
+    </div>
+  </nav>
+
+  <script>
+    // بيانات المطاعم مع روابط موثوقة تعمل 100%
+    const restaurantsData = {
+      "restaurants": [
+        {
+          "id": "shawerma-plus",
+          "name": "شاورما بلس",
+          "image": "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+          "logo": "https://i.postimg.cc/3wZ7Qz8L/shawerma-plus-logo.png",
+          "rating": 4.8,
+          "category": "وجبات سريعة"
+        },
+        {
+          "id": "shawerma-express",
+          "name": "شاورما اكسبرس",
+          "image": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+          "logo": "https://i.postimg.cc/3wZ7Qz8L/shawerma-plus-logo.png",
+          "rating": 4.7,
+          "category": "وجبات سريعة"
+        },
+        {
+          "id": "pizza-salamia",
+          "name": "بيتزا سلمية",
+          "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+          "logo": "https://i.postimg.cc/3wZ7Qz8L/shawerma-plus-logo.png",
+          "rating": 4.9,
+          "category": "بيتزا"
+        },
+        {
+          "id": "family-grill",
+          "name": "مشاوي العائلة",
+          "image": "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+          "logo": "https://i.postimg.cc/3wZ7Qz8L/shawerma-plus-logo.png",
+          "rating": 4.6,
+          "category": "مشاوي"
+        },
+        {
+          "id": "sweets-cafe",
+          "name": "كافيه الحلويات",
+          "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          "logo": "https://i.postimg.cc/3wZ7Qz8L/shawerma-plus-logo.png",
+          "rating": 4.5,
+          "category": "حلويات"
+        },
+        {
+          "id": "sea-restaurant",
+          "name": "مطعم البحر",
+          "image": "https://images.unsplash.com/photo-1563379091339-03246963d96c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+          "logo": "https://i.postimg.cc/3wZ7Qz8L/shawerma-plus-logo.png",
+          "rating": 4.7,
+          "category": "مأكولات بحرية"
+        }
+      ]
+    };
+
+    // دالة لتحميل وعرض المطاعم
+    async function loadRestaurants() {
+      try {
+        // محاولة تحميل البيانات من ملف JSON أولاً
+        const response = await fetch('restaurants.json?v=' + Date.now());
+        const data = await response.json();
+        displayRestaurants(data.restaurants);
+      } catch (error) {
+        console.log('خطأ في تحميل المطاعم من JSON، استخدام البيانات المحلية:', error);
+        // استخدام البيانات المحلية كبديل
+        displayRestaurants(restaurantsData.restaurants);
+      }
+    }
+
+    // دالة لعرض المطاعم
+    function displayRestaurants(restaurants) {
+      const container = document.getElementById('restaurants-container');
+      
+      if (restaurants.length === 0) {
+        container.innerHTML = '<div class="loading"><p>لا توجد مطاعم متاحة</p></div>';
+        return;
+      }
+      
+      container.innerHTML = restaurants.map(restaurant => `
+        <a href="${restaurant.id}.html" class="restaurant-card">
+          <div class="card-header">
+            <img src="${restaurant.image}" alt="${restaurant.name}" class="restaurant-image" 
+                 onerror="this.src='https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+            <div class="logo-background">
+              <div class="restaurant-logo">
+                <img src="${restaurant.logo}" alt="${restaurant.name}" 
+                     onerror="this.src='https://i.postimg.cc/3wZ7Qz8L/shawerma-plus-logo.png'">
+              </div>
+            </div>
+            ${restaurant.rating >= 4.8 ? '<div class="card-badge">مميز</div>' : ''}
+          </div>
+          <div class="card-content">
+            <h3 class="restaurant-name">${restaurant.name}</h3>
+            <div class="restaurant-info">
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                ${restaurant.rating}
+              </div>
+            </div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // تحميل المطاعم عند فتح الصفحة
+    document.addEventListener('DOMContentLoaded', loadRestaurants);
+
+    // تحديث وظيفة البحث
+    function searchRestaurants() {
+      const query = document.querySelector('.search-input').value.toLowerCase();
+      const cards = document.querySelectorAll('.restaurant-card');
+      
+      cards.forEach(card => {
+        const name = card.querySelector('.restaurant-name').textContent.toLowerCase();
+        card.style.display = name.includes(query) ? 'block' : 'none';
+      });
+    }
+
+    // إضافة event listeners للبحث
+    document.querySelector('.search-button').addEventListener('click', searchRestaurants);
+    document.querySelector('.search-input').addEventListener('keyup', searchRestaurants);
+  </script>
+</body>
+</html>
