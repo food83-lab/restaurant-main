@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بيتزا هات - Salamia Deliveo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===== إعدادات عامة ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f8f9fa;
+      color: #2D3436;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* ===== الهيدر العام ===== */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #F15A29, #FFD27F);
+      padding: 12px 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .logo-container img {
+      height: 45px;
+      width: auto;
+    }
+
+    /* ===== معلومات المطعم ===== */
+    .restaurant-info {
+      max-width: 1200px;
+      margin: 20px auto 0;
+      padding: 0 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      margin-bottom: 20px;
+    }
+
+    .info-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .restaurant-logo-large {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      overflow: hidden;
+      margin-left: 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .restaurant-logo-large img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .title-section {
+      flex-grow: 1;
+    }
+
+    .restaurant-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #2C3E50;
+      margin-bottom: 5px;
+    }
+
+    .restaurant-category {
+      color: #BDC3C7;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .info-details {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .info-item i {
+      color: #F15A29;
+      font-size: 1.1rem;
+      margin-left: 12px;
+      width: 20px;
+    }
+
+    .info-text {
+      flex-grow: 1;
+    }
+
+    .info-label {
+      font-size: 0.8rem;
+      color: #BDC3C7;
+    }
+
+    .info-value {
+      font-weight: 600;
+      margin-top: 2px;
+      font-size: 0.9rem;
+    }
+
+    /* ===== أقسام المنيو ===== */
+    .menu-section {
+      background: white;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #ECF0F1;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #F15A29, #FFD27F);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 15px;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2C3E50;
+      flex-grow: 1;
+    }
+
+    .sub-section {
+      margin-bottom: 25px;
+    }
+
+    .sub-section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #F15A29;
+      margin-bottom: 15px;
+      padding-right: 10px;
+      border-right: 3px solid #F15A29;
+    }
+
+    /* نظام البطاقات */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    .menu-item {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #ECF0F1;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border-color: #F15A29;
+    }
+
+    .menu-item-image {
+      height: 120px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .menu-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-item:hover .menu-item-image img {
+      transform: scale(1.05);
+    }
+
+    .menu-item-content {
+      padding: 12px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-item-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: #2C3E50;
+      line-height: 1.3;
+    }
+
+    .menu-item-desc {
+      color: #BDC3C7;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px 0;
+    }
+
+    .quantity-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #ECF0F1;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      font-size: 0.85rem;
+    }
+
+    .quantity-btn:hover {
+      background: #F15A29;
+      color: white;
+    }
+
+    .quantity-input {
+      width: 32px;
+      text-align: center;
+      margin: 0 6px;
+      border: 1px solid #BDC3C7;
+      border-radius: 5px;
+      padding: 4px;
+      font-size: 0.85rem;
+    }
+
+    .menu-item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .menu-item-price {
+      font-weight: 800;
+      color: #F15A29;
+      font-size: 0.95rem;
+    }
+
+    .add-to-cart {
+      background: #F15A29;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      padding: 6px 12px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      flex: 1;
+      max-width: 70px;
+    }
+
+    .add-to-cart:hover {
+      background: #E83F3F;
+    }
+
+    /* ===== سلة التسوق المنبثقة ===== */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 85%;
+      max-width: 350px;
+      height: 100vh;
+      background: white;
+      box-shadow: 8px 0 24px rgba(0,0,0,0.15);
+      z-index: 1100;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-sidebar.open {
+      left: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #ECF0F1;
+    }
+
+    .cart-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #2C3E50;
+    }
+
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: #BDC3C7;
+      transition: color 0.3s ease;
+    }
+
+    .close-cart:hover {
+      color: #F15A29;
+    }
+
+    .cart-items {
+      margin-bottom: 15px;
+      flex-grow: 1;
+      overflow-y: auto;
+      max-height: calc(100vh - 450px);
+      min-height: 150px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #ECF0F1;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+    }
+
+    .cart-item-price {
+      color: #F15A29;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+    }
+
+    .cart-quantity-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #ECF0F1;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+    }
+
+    .cart-quantity-btn:hover {
+      background: #F15A29;
+      color: white;
+    }
+
+    .cart-quantity-input {
+      width: 28px;
+      text-align: center;
+      margin: 0 4px;
+      font-size: 0.85rem;
+      border: 1px solid #BDC3C7;
+      border-radius: 5px;
+      padding: 2px;
+    }
+
+    .remove-item {
+      color: #E83F3F;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-right: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .remove-item:hover {
+      color: #C0392B;
+    }
+
+    .customer-info {
+      margin-bottom: 15px;
+      padding-top: 12px;
+      border-top: 1px solid #ECF0F1;
+    }
+
+    .customer-info-title {
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #2C3E50;
+      font-size: 0.95rem;
+    }
+
+    .customer-input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #BDC3C7;
+      border-radius: 8px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+
+    .customer-input:focus {
+      outline: none;
+      border-color: #F15A29;
+      box-shadow: 0 0 0 2px rgba(241, 90, 41, 0.2);
+    }
+
+    .customer-input::placeholder {
+      color: #BDC3C7;
+    }
+
+    .payment-methods {
+      margin-bottom: 15px;
+      padding-top: 12px;
+      border-top: 1px solid #ECF0F1;
+    }
+
+    .payment-methods-title {
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #2C3E50;
+      font-size: 0.95rem;
+    }
+
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ECF0F1;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .payment-option:hover {
+      border-color: #F15A29;
+    }
+
+    .payment-option.selected {
+      border-color: #F15A29;
+      background-color: rgba(241, 90, 41, 0.05);
+    }
+
+    .payment-icon {
+      margin-left: 10px;
+      font-size: 1.2rem;
+      color: #F15A29;
+    }
+
+    .payment-label {
+      flex-grow: 1;
+      font-weight: 600;
+    }
+
+    .sham-cash {
+      background: linear-gradient(135deg, #FFD700, #1E90FF);
+      color: white;
+    }
+
+    .usdt {
+      background: linear-gradient(135deg, #00AA00, #006400);
+      color: white;
+    }
+
+    .cash {
+      background: linear-gradient(135deg, #F15A29, #E83F3F);
+      color: white;
+    }
+
+    .cart-summary {
+      padding-top: 12px;
+      border-top: 2px solid #BDC3C7;
+      background: white;
+      position: sticky;
+      bottom: 0;
+      padding-bottom: 20px;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    .whatsapp-order-btn {
+      background: #BDC3C7;
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 16px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      width: 100%;
+      cursor: not-allowed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .whatsapp-order-btn.active {
+      background: #25D366;
+      cursor: pointer;
+    }
+
+    .whatsapp-order-btn.active:hover {
+      background: #128C7E;
+    }
+
+    /* نافذة عرض عنوان USDT */
+    .usdt-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1200;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .usdt-modal.active {
+      display: flex;
+    }
+
+    .usdt-content {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 350px;
+      width: 90%;
+    }
+
+    .usdt-title {
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #2C3E50;
+      font-size: 1.2rem;
+    }
+
+    .wallet-address {
+      background: #f8f9fa;
+      border: 1px solid #ECF0F1;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      text-align: right;
+      direction: ltr;
+      word-break: break-all;
+      position: relative;
+    }
+
+    .wallet-type {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #F15A29;
+      font-size: 1rem;
+    }
+
+    .wallet-code {
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #2C3E50;
+      margin-bottom: 10px;
+    }
+
+    .copy-btn {
+      background: #F15A29;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 100%;
+    }
+
+    .copy-btn:hover {
+      background: #E83F3F;
+    }
+
+    .copy-btn.copied {
+      background: #25D366;
+    }
+
+    .close-usdt {
+      background: #F15A29;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .close-usdt:hover {
+      background: #E83F3F;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: none;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    .cart-icon-badge {
+      position: relative;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      background: #E83F3F;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .empty-cart-message {
+      text-align: center;
+      padding: 20px;
+      color: #BDC3C7;
+    }
+
+    .empty-cart-message i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    /* ===== الشريط السفلي ===== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 8px 0;
+    }
+
+    .nav-items {
+      display: flex;
+      justify-content: space-around;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #BDC3C7;
+      font-size: 0.75rem;
+      transition: all 0.3s ease;
+      padding: 4px 12px;
+    }
+
+    .nav-item.active, .nav-item:hover {
+      color: #F15A29;
+    }
+
+    .nav-item i {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    /* ===== التكيف مع الشاشات الصغيرة جداً ===== */
+    @media (max-width: 360px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      
+      .header-content {
+        padding: 0 10px;
+      }
+      
+      .restaurant-info {
+        padding: 0 10px;
+      }
+      
+      .info-card {
+        padding: 15px;
+      }
+
+      .menu-item-image {
+        height: 100px;
+      }
+
+      .restaurant-logo-large {
+        width: 80px;
+        height: 80px;
+      }
+
+      .restaurant-title {
+        font-size: 1.3rem;
+      }
+      
+      .cart-summary {
+        padding-bottom: 15px;
+      }
+    }
+
+    /* ===== تحسينات للشاشات المتوسطة ===== */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      
+      .menu-item-image {
+        height: 140px;
+      }
+      
+      .restaurant-info {
+        margin: 20px auto 0;
+      }
+    }
+
+    /* ===== تحسينات للشاشات الكبيرة ===== */
+    @media (min-width: 769px) {
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .menu-item-image {
+        height: 160px;
+      }
+      
+      .restaurant-info {
+        margin: 20px auto 0;
+        padding: 0 20px;
+      }
+      
+      .info-card {
+        padding: 25px;
+      }
+      
+      .header-content {
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- الهيدر الثابت -->
+  <header class="sticky-header">
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="https://i.postimg.cc/SKYvRztj/Logo.png" alt="Salamia Deliveo">
+      </div>
+    </div>
+  </header>
+
+  <!-- معلومات المطعم -->
+  <section class="restaurant-info">
+    <div class="info-card">
+      <div class="info-header">
+        <div class="restaurant-logo-large">
+          <img src="https://i.ibb.co/V0xkSW2b/image.jpg" 
+               alt="بيتزا هات">
+        </div>
+        <div class="title-section">
+          <h1 class="restaurant-title">بيتزا هات</h1>
+          <p class="restaurant-category">بيتزا و</p>
+        </div>
+      </div>
+
+      <div class="info-details">
+        <div class="info-item">
+          <i class="fas fa-clock"></i>
+          <div class="info-text">
+            <div class="info-label">ساعات العمل</div>
+            <div class="info-value">١٠:٠٠ ص - ١٢:٠٠ ص</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div class="info-text">
+            <div class="info-label">العنوان</div>
+            <div class="info-value">سلمية، شارع حماه</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-truck"></i>
+          <div class="info-text">
+            <div class="info-label">خدمة التوصيل</div>
+            <div class="info-value">متوفرة لجميع أنحاء المدينة</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- قسم البيتزا -->
+    <div class="menu-section">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="fas fa-pizza-slice"></i>
+        </div>
+        <h2 class="section-title">البيتزا</h2>
+      </div>
+
+      <div class="menu-grid">
+        <!-- بيتزا عادية وسط -->
+        <div class="menu-item" data-id="1" data-name="بيتزا عادية وسط" data-price="40000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/nMy8FCXy/image.jpg" 
+                 alt="بيتزا عادية وسط">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا عادية وسط</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٤٠,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا عادية كبير -->
+        <div class="menu-item" data-id="2" data-name="بيتزا عادية كبير" data-price="50000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/hRsvdXmZ/image.jpg" 
+                 alt="بيتزا عادية كبير">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا عادية كبير</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٥٠,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا سبسيال وسط -->
+        <div class="menu-item" data-id="3" data-name="بيتزا سبسيال وسط" data-price="45000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/HTD18x0H/image.jpg" 
+                 alt="بيتزا سبسيال وسط">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا سبسيال وسط</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٤٥,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا سبسيال كبير -->
+        <div class="menu-item" data-id="4" data-name="بيتزا سبسيال كبير" data-price="55000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/pv4zCHC9/image.jpg" 
+                 alt="بيتزا سبسيال كبير">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا سبسيال كبير</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٥٥,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا مرغريتا وسط -->
+        <div class="menu-item" data-id="5" data-name="بيتزا مرغريتا وسط" data-price="35000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/vvkjtPnk/image.jpg" 
+                 alt="بيتزا مرغريتا وسط">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا مرغريتا وسط</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٣٥,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا مرغريتا كبير -->
+        <div class="menu-item" data-id="6" data-name="بيتزا مرغريتا كبير" data-price="50000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/7xG7zgjd/image.jpg" 
+                 alt="بيتزا مرغريتا كبير">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا مرغريتا كبير</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٥٠,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا الخضار وسط -->
+        <div class="menu-item" data-id="7" data-name="بيتزا الخضار وسط" data-price="35000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/pjL3vPFB/image.jpg" 
+                 alt="بيتزا الخضار وسط">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا الخضار وسط</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٣٥,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا الخضار كبير -->
+        <div class="menu-item" data-id="8" data-name="بيتزا الخضار كبير" data-price="50000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/k63W5L6w/image.jpg" 
+                 alt="بيتزا الخضار كبير">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا الخضار كبير</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٥٠,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا ببروني وسط -->
+        <div class="menu-item" data-id="9" data-name="بيتزا ببروني وسط" data-price="50000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/yn4p3DQD/image.jpg 
+                 alt="بيتزا ببروني وسط">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا ببروني وسط</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٥٠,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا ببروني كبير -->
+        <div class="menu-item" data-id="10" data-name="بيتزا ببروني كبير" data-price="65000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/2fQLyMS/image.jpg" 
+                 alt="بيتزا ببروني كبير">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا ببروني كبير</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٦٥,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا السجق وسط -->
+        <div class="menu-item" data-id="11" data-name="بيتزا السجق وسط" data-price="45000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/j9h9N7yQ/image.jpg" 
+                 alt="بيتزا السجق وسط">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا السجق وسط</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٤٥,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا السجق كبير -->
+        <div class="menu-item" data-id="12" data-name="بيتزا السجق كبير" data-price="60000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/n83yhBDC/image.jpg" 
+                 alt="بيتزا السجق كبير">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا السجق كبير</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٦٠,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا سوبريم وسط -->
+        <div class="menu-item" data-id="13" data-name="بيتزا سوبريم وسط" data-price="50000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/VW7d7QMy/image.jpg" 
+                 alt="بيتزا سوبريم وسط">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا سوبريم وسط</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٥٠,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا سوبريم كبير -->
+        <div class="menu-item" data-id="14" data-name="بيتزا سوبريم كبير" data-price="65000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/JRyQWDV6/image.jpg" 
+                 alt="بيتزا سوبريم كبير">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا سوبريم كبير</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٦٥,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا فارمرز وسط -->
+        <div class="menu-item" data-id="15" data-name="بيتزا فارمرز وسط" data-price="45000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/JRyQWDV6/image.jpg" 
+                 alt="بيتزا فارمرز وسط">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا فارمرز وسط</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٤٥,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيتزا فارمرز كبير -->
+        <div class="menu-item" data-id="16" data-name="بيتزا فارمرز كبير" data-price="60000">
+          <div class="menu-item-image">
+            <img src="https://i.ibb.co/4gKSPh8K/image.jpg" 
+                 alt="بيتزا فارمرز كبير">
+          </div>
+          <div class="menu-item-content">
+            <h3 class="menu-item-title">بيتزا فارمرز كبير</h3>
+            <p class="menu-item-desc"></p>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn plus">+</button>
+            </div>
+            <div class="menu-item-footer">
+              <span class="menu-item-price">٦٠,٠٠٠ ل.س</span>
+              <button class="add-to-cart">إضافة</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- سلة التسوق المنبثقة -->
+  <div class="overlay" id="cart-overlay"></div>
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h2 class="cart-title">سلة الطلبات</h2>
+      <button class="close-cart" id="close-cart">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <!-- سيتم ملء هذا القسم بالطلبات عبر JavaScript -->
+      <div class="empty-cart-message" id="empty-cart-message">
+        <i class="fas fa-shopping-cart"></i>
+        <p>سلة التسوق فارغة</p>
+      </div>
+    </div>
+    
+    <!-- خانات معلومات العميل -->
+    <div class="customer-info">
+      <div class="customer-info-title">معلومات التوصيل</div>
+      <input type="text" class="customer-input" id="customer-name" placeholder="الاسم الكامل" required>
+      <input type="text" class="customer-input" id="customer-address" placeholder="العنوان التفصيلي" required>
+      <input type="tel" class="customer-input" id="customer-phone" placeholder="رقم الهاتف" required>
+    </div>
+    
+    <!-- طرق الدفع -->
+    <div class="payment-methods">
+      <div class="payment-methods-title">طريقة الدفع</div>
+      <div class="payment-options">
+        <div class="payment-option cash selected" id="payment-cash">
+          <i class="fas fa-money-bill-wave payment-icon"></i>
+          <span class="payment-label">الدفع نقداً عند الاستلام</span>
+        </div>
+        <div class="payment-option sham-cash" id="payment-shamcash">
+          <i class="fas fa-wallet payment-icon"></i>
+          <span class="payment-label">شام كاش</span>
+        </div>
+        <div class="payment-option usdt" id="payment-usdt">
+          <i class="fas fa-dollar-sign payment-icon"></i>
+          <span class="payment-label">USDT</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="cart-summary">
+      <div class="cart-total">
+        <span>المجموع:</span>
+        <span id="cart-total-price">٠ ل.س</span>
+      </div>
+      <button class="whatsapp-order-btn" id="whatsapp-order">
+        <i class="fab fa-whatsapp"></i>
+        اطلب عبر واتساب
+      </button>
+    </div>
+  </div>
+
+  <!-- نافذة عرض عنوان USDT -->
+  <div class="usdt-modal" id="usdt-modal">
+    <div class="usdt-content">
+      <h3 class="usdt-title">عنوان محفظة USDT</h3>
+      
+      <div class="wallet-address">
+        <div class="wallet-type">TRC20</div>
+        <div class="wallet-code">TFu14qrf3FpA5NbDrpAS66NE1krTWzMNAw</div>
+        <button class="copy-btn" data-address="TFu14qrf3FpA5NbDrpAS66NE1krTWzMNAw">
+          <i class="far fa-copy"></i>
+          نسخ العنوان
+        </button>
+      </div>
+      
+      <div class="wallet-address">
+        <div class="wallet-type">BEP20</div>
+        <div class="wallet-code">0x15a1da3d6638a0d0516cbde202347f03e70c3b3f</div>
+        <button class="copy-btn" data-address="0x15a1da3d6638a0d0516cbde202347f03e70c3b3f">
+          <i class="far fa-copy"></i>
+          نسخ العنوان
+        </button>
+      </div>
+      
+      <button class="close-usdt" id="close-usdt">إغلاق</button>
+    </div>
+  </div>
+
+  <!-- الشريط السفلي -->
+  <nav class="bottom-nav">
+    <div class="nav-items">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>الرئيسية</span>
+      </a>
+      <a href="#" class="nav-item active cart-icon-badge" id="open-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span>السلة</span>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // === الدالة الجديدة لمعالجة الأسعار بشكل آمن ===
+      function parsePrice(price) {
+        if (typeof price === 'number') return price;
+        if (typeof price === 'string') {
+          // إزالة أي أحرف غير رقمية بما في ذلك الفواصل
+          const cleanPrice = price.replace(/[^\d]/g, '');
+          const parsed = parseInt(cleanPrice, 10);
+          return isNaN(parsed) ? 0 : parsed;
+        }
+        return 0;
+      }
+
+      // === العناصر والبيانات ===
+      const cartSidebar = document.getElementById('cart-sidebar');
+      const cartOverlay = document.getElementById('cart-overlay');
+      const openCartBtn = document.getElementById('open-cart');
+      const closeCartBtn = document.getElementById('close-cart');
+      const cartItemsContainer = document.getElementById('cart-items');
+      const emptyCartMessage = document.getElementById('empty-cart-message');
+      const cartBadge = document.getElementById('cart-badge');
+      const cartTotalPrice = document.getElementById('cart-total-price');
+      const whatsappOrderBtn = document.getElementById('whatsapp-order');
+      const customerName = document.getElementById('customer-name');
+      const customerAddress = document.getElementById('customer-address');
+      const customerPhone = document.getElementById('customer-phone');
+      const paymentCash = document.getElementById('payment-cash');
+      const paymentShamcash = document.getElementById('payment-shamcash');
+      const paymentUsdt = document.getElementById('payment-usdt');
+      const usdtModal = document.getElementById('usdt-modal');
+      const closeUsdt = document.getElementById('close-usdt');
+      const copyButtons = document.querySelectorAll('.copy-btn');
+      
+      let cart = [];
+      let selectedPayment = 'cash';
+
+      // === فتح وإغلاق السلة ===
+      openCartBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openCart();
+      });
+      
+      closeCartBtn.addEventListener('click', closeCart);
+      cartOverlay.addEventListener('click', closeCart);
+
+      function openCart() {
+        cartSidebar.classList.add('open');
+        cartOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeCart() {
+        cartSidebar.classList.remove('open');
+        cartOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+
+      // === إضافة العناصر إلى السلة ===
+      document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function() {
+          const menuItem = this.closest('.menu-item');
+          const itemId = menuItem.dataset.id;
+          const itemName = menuItem.dataset.name;
+          const itemPrice = parsePrice(menuItem.dataset.price); // استخدام الدالة الجديدة
+          const quantityInput = menuItem.querySelector('.quantity-input');
+          const quantity = parseInt(quantityInput.value);
+          
+          addToCart(itemId, itemName, itemPrice, quantity);
+          openCart();
+          showNotification(`تم إضافة ${itemName} إلى السلة`);
+        });
+      });
+
+      // === وظيفة إضافة إلى السلة ===
+      function addToCart(id, name, price, quantity) {
+        const existingItem = cart.find(item => item.id === id);
+        
+        if (existingItem) {
+          existingItem.quantity += quantity;
+        } else {
+          cart.push({
+            id: id,
+            name: name,
+            price: price,
+            quantity: quantity
+          });
+        }
+        
+        updateCartUI();
+      }
+
+      // === تحديث واجهة سلة التسوق ===
+      function updateCartUI() {
+        // تحديث عدد العناصر في الشارة
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        cartBadge.textContent = totalItems;
+        
+        // تحديث إجمالي السعر
+        const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        cartTotalPrice.textContent = formatPrice(totalPrice);
+        
+        // تحديث قائمة العناصر في السلة
+        cartItemsContainer.innerHTML = '';
+        
+        if (cart.length === 0) {
+          cartItemsContainer.appendChild(emptyCartMessage);
+          emptyCartMessage.style.display = 'block';
+          whatsappOrderBtn.classList.remove('active');
+        } else {
+          emptyCartMessage.style.display = 'none';
+          
+          cart.forEach(item => {
+            const cartItemElement = createCartItemElement(item);
+            cartItemsContainer.appendChild(cartItemElement);
+          });
+          
+          // تفعيل زر الطلب
+          validateCustomerInfo();
+        }
+      }
+
+      // === إنشاء عنصر سلة تسوق ===
+      function createCartItemElement(item) {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.dataset.id = item.id;
+        
+        cartItem.innerHTML = `
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${formatPrice(item.price)}</div>
+          </div>
+          <div class="cart-item-quantity">
+            <button class="remove-item" title="إزالة">
+              <i class="fas fa-trash"></i>
+            </button>
+            <button class="cart-quantity-btn minus">-</button>
+            <input type="number" class="cart-quantity-input" value="${item.quantity}" min="1" max="99">
+            <button class="cart-quantity-btn plus">+</button>
+          </div>
+        `;
+        
+        // إضافة مستمعي الأحداث للأزرار
+        const minusBtn = cartItem.querySelector('.minus');
+        const plusBtn = cartItem.querySelector('.plus');
+        const quantityInput = cartItem.querySelector('.cart-quantity-input');
+        const removeBtn = cartItem.querySelector('.remove-item');
+        
+        minusBtn.addEventListener('click', function() {
+          if (item.quantity > 1) {
+            item.quantity--;
+            quantityInput.value = item.quantity;
+            updateCartUI();
+          }
+        });
+        
+        plusBtn.addEventListener('click', function() {
+          if (item.quantity < 99) {
+            item.quantity++;
+            quantityInput.value = item.quantity;
+            updateCartUI();
+          }
+        });
+        
+        quantityInput.addEventListener('change', function() {
+          const newQuantity = parseInt(this.value);
+          if (newQuantity >= 1 && newQuantity <= 99) {
+            item.quantity = newQuantity;
+            updateCartUI();
+          } else {
+            this.value = item.quantity;
+          }
+        });
+        
+        removeBtn.addEventListener('click', function() {
+          cart = cart.filter(cartItem => cartItem.id !== item.id);
+          updateCartUI();
+          showNotification(`تم إزالة ${item.name} من السلة`);
+        });
+        
+        return cartItem;
+      }
+
+      // === تنسيق السعر ===
+      function formatPrice(price) {
+        return new Intl.NumberFormat('ar-SY').format(price) + ' ل.س';
+      }
+
+      // === التحقق من صحة معلومات العميل ===
+      function validateCustomerInfo() {
+        const name = customerName.value.trim();
+        const address = customerAddress.value.trim();
+        const phone = customerPhone.value.trim();
+        
+        if (name && address && phone && cart.length > 0) {
+          whatsappOrderBtn.classList.add('active');
+          whatsappOrderBtn.disabled = false;
+        } else {
+          whatsappOrderBtn.classList.remove('active');
+          whatsappOrderBtn.disabled = true;
+        }
+      }
+
+      // === إضافة مستمعي الأحداث لحقول معلومات العميل ===
+      customerName.addEventListener('input', validateCustomerInfo);
+      customerAddress.addEventListener('input', validateCustomerInfo);
+      customerPhone.addEventListener('input', validateCustomerInfo);
+
+      // === اختيار طريقة الدفع ===
+      paymentCash.addEventListener('click', function() {
+        selectedPayment = 'cash';
+        updatePaymentSelection();
+      });
+      
+      paymentShamcash.addEventListener('click', function() {
+        selectedPayment = 'shamcash';
+        updatePaymentSelection();
+      });
+      
+      paymentUsdt.addEventListener('click', function() {
+        selectedPayment = 'usdt';
+        updatePaymentSelection();
+        showUsdtAddress();
+      });
+
+      // === تحديث اختيار طريقة الدفع ===
+      function updatePaymentSelection() {
+        // إزالة التحديد من جميع الخيارات
+        paymentCash.classList.remove('selected');
+        paymentShamcash.classList.remove('selected');
+        paymentUsdt.classList.remove('selected');
+        
+        // إضافة التحديد للخيار المختار
+        if (selectedPayment === 'cash') {
+          paymentCash.classList.add('selected');
+        } else if (selectedPayment === 'shamcash') {
+          paymentShamcash.classList.add('selected');
+        } else if (selectedPayment === 'usdt') {
+          paymentUsdt.classList.add('selected');
+        }
+      }
+
+      // === عرض نافذة USDT ===
+      function showUsdtAddress() {
+        usdtModal.classList.add('active');
+      }
+
+      // === إغلاق نافذة USDT ===
+      closeUsdt.addEventListener('click', function() {
+        usdtModal.classList.remove('active');
+      });
+
+      // === وظيفة نسخ عنوان المحفظة ===
+      copyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const address = this.getAttribute('data-address');
+          copyToClipboard(address);
+          
+          // تغيير النص والمظهر مؤقتاً
+          const originalText = this.innerHTML;
+          this.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+          this.classList.add('copied');
+          
+          setTimeout(() => {
+            this.innerHTML = originalText;
+            this.classList.remove('copied');
+          }, 2000);
+        });
+      });
+
+      function copyToClipboard(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        
+        showNotification('تم نسخ العنوان إلى الحافظة');
+      }
+
+      // === إرسال الطلب عبر واتساب ===
+      whatsappOrderBtn.addEventListener('click', function() {
+        if (this.disabled) return;
+        
+        const name = customerName.value.trim();
+        const address = customerAddress.value.trim();
+        const phone = customerPhone.value.trim();
+        
+        // إنشاء رسالة الطلب
+        let message = `🎯 طلب جديد من بيتزا هات\n\n`;
+        message += `👤 العميل: ${name}\n`;
+        message += `📞 الهاتف: ${phone}\n`;
+        message += `📍 العنوان: ${address}\n\n`;
+        message += `🛒 الطلبات:\n`;
+        
+        cart.forEach((item, index) => {
+          message += `${index + 1}. ${item.name} - ${item.quantity} × ${formatPrice(item.price)}\n`;
+        });
+        
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        message += `\n💰 المجموع: ${formatPrice(total)}\n`;
+        message += `💳 طريقة الدفع: ${getPaymentMethodName(selectedPayment)}\n\n`;
+        message += `شكراً لطلبكم من بيتزا هات! 🍕`;
+        
+        // ترميز الرسالة للرابط
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/963957275347?text=${encodedMessage}`;
+        
+        // فتح واتساب
+        window.open(whatsappUrl, '_blank');
+        
+        // إظهار رسالة نجاح
+        showNotification('✅ تم إرسال طلبك بنجاح!');
+        
+        // تنظيف السلة
+        cart = [];
+        updateCartUI();
+        closeCart();
+        
+        // تنظيف الحقول
+        customerName.value = '';
+        customerAddress.value = '';
+        customerPhone.value = '';
+      });
+
+      // === الحصول على اسم طريقة الدفع ===
+      function getPaymentMethodName(method) {
+        switch(method) {
+          case 'cash': return 'نقداً عند الاستلام';
+          case 'shamcash': return 'شام كاش';
+          case 'usdt': return 'USDT';
+          default: return 'غير محدد';
+        }
+      }
+
+      // === إظهار إشعار ===
+      function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 80px;
+          right: 20px;
+          background: #25D366;
+          color: white;
+          padding: 12px 20px;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          z-index: 2000;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          opacity: 0;
+          transform: translateY(-20px);
+        `;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        // إظهار الإشعار
+        setTimeout(() => {
+          notification.style.opacity = '1';
+          notification.style.transform = 'translateY(0)';
+        }, 10);
+        
+        // إخفاء الإشعار بعد 3 ثوانٍ
+        setTimeout(() => {
+          notification.style.opacity = '0';
+          notification.style.transform = 'translateY(-20px)';
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 300);
+        }, 3000);
+      }
+
+      // === التحكم في الكمية في قائمة الطعام ===
+      document.querySelectorAll('.quantity-controls').forEach(control => {
+        const minusBtn = control.querySelector('.minus');
+        const plusBtn = control.querySelector('.plus');
+        const quantityInput = control.querySelector('.quantity-input');
+        
+        minusBtn.addEventListener('click', function() {
+          let value = parseInt(quantityInput.value);
+          if (value > 1) {
+            quantityInput.value = value - 1;
+          }
+        });
+        
+        plusBtn.addEventListener('click', function() {
+          let value = parseInt(quantityInput.value);
+          if (value < 99) {
+            quantityInput.value = value + 1;
+          }
+        });
+        
+        quantityInput.addEventListener('change', function() {
+          let value = parseInt(this.value);
+          if (value < 1) this.value = 1;
+          if (value > 99) this.value = 99;
+        });
+      });
+
+      // === تهيئة اختيار طريقة الدفع الافتراضية ===
+      updatePaymentSelection();
+    });
+  </script>
+</body>
+</html>
