@@ -1,0 +1,86 @@
+{
+  "offers": [
+    {
+      "id": 1,
+      "restaurant_id": "alassi",
+      "restaurant_name": "العاصي",
+      "title": "طبق رز وشاورما",
+      "description": "احصل على طبق رز مع لحم الشاورما بسعر خاص",
+      "original_price": 30000,
+      "offer_price": 20000,
+      "savings": 10000,
+      "savings_percentage": 33,
+      "image": "https://i.ibb.co/C5fSGhrx/image.png",
+      "show_in_index": true,
+      "show_in_offers": true,
+      "show_in_restaurant": true,
+      "active": true,
+      "start_date": "2025-01-01",
+      "expiry_date": "غير محدد",
+      "category": "عروض كومبو",
+      "delivery_time": "30-45 دقيقة",
+      "preparation_time": "15-20 دقيقة",
+      "tags": ["شاورما", "رز", "كومبو"],
+      "add_to_cart_data": {
+        "product_id": "royal-shawerma-combo",
+        "quantity": 1,
+        "variant": "combo"
+      }
+    },
+    {
+      "id": 2,
+      "restaurant_id": "alassi",
+      "restaurant_name": "العاصي",
+      "title": "عرض 3 ساندويش شاورما",
+      "description": "احصل على 3 ساندويشات شاورما بسعر خاص",
+      "original_price": 45000,
+      "offer_price": 25000,
+      "savings": 20000,
+      "savings_percentage": 44,
+      "image": "https://i.ibb.co/C5fSGhrx/image.png",
+      "show_in_index": true,
+      "show_in_offers": true,
+      "show_in_restaurant": true,
+      "active": true,
+      "start_date": "2024-01-01",
+      "expiry_date": "غير محدد",
+      "items_included": ["ساندويش شاورما × 3"],
+      "category": "عروض عائلية",
+      "delivery_time": "40-55 دقيقة",
+      "preparation_time": "25-30 دقيقة",
+      "tags": ["ساندويش", "عائلية", "شاورما"],
+      "add_to_cart_data": {
+        "product_id": "pizza-family-offer",
+        "quantity": 1,
+        "variant": "family"
+      }
+    },
+    {
+      "id": 3,
+      "restaurant_id": "alassi",
+      "restaurant_name": "العاصي",
+      "title": "عرض فروج مشوي",
+      "description": "احصل على فروج مشوي + رز + ثوم + بطاطا + مخلل + خبز حراق",
+      "original_price": 75000,
+      "offer_price": 60000,
+      "savings": 15000,
+      "savings_percentage": 20,
+      "image": "https://i.ibb.co/C5fSGhrx/image.png",
+      "show_in_index": true,
+      "show_in_offers": true,
+      "show_in_restaurant": true,
+      "active": true,
+      "start_date": "2024-01-01",
+      "expiry_date": "2024-12-31",
+      "category": "فروج",
+      "delivery_time": "25-35 دقيقة",
+      "preparation_time": "15-20 دقيقة",
+      "tags": ["مقبلات", "فروج", "رز"],
+      "add_to_cart_data": {
+        "product_id": "alassi-appetizers-combo",
+        "quantity": 1,
+        "variant": "family"
+      }
+    }
+  ]
+}
